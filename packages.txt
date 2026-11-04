@@ -1,0 +1,3 @@
+# Streamlit Community Cloud 会在构建时用 apt 安装这里列出的系统依赖
+# 中文字体：词云与 matplotlib 中文显示需要
+fonts-noto-cjk

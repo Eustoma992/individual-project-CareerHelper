@@ -1,0 +1,17 @@
+{
+  "name": "大学生实习&校招笔面试数据分析辅导工具",
+  "short_name": "校招备考",
+  "description": "16 个岗位考情画像驱动的笔试与模拟面试工具，打开即用，数据保存在本机。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F9FC",
+  "theme_color": "#2578E0",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>大学生实习&校招笔面试数据分析辅导工具</title>
+<meta name="description" content="16 个岗位的真实考情画像驱动：考点分布、题型配比、高频面试题、笔试与语音面试、量化复盘。打开即用，无需注册。">
+<meta name="theme-color" content="#2578E0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="校招备考">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a class="brand" href="#home" data-nav="home">
+      <span class="brand__mark">🎓</span>
+      <span class="brand__text">校招笔面试辅导</span>
+    </a>
+
+    <nav class="nav__menu" id="nav-menu">
+      <a data-nav="home">首页</a>
+      <a data-nav="board">岗位看板</a>
+      <a data-nav="written">笔试模拟</a>
+      <a data-nav="interview">面试模拟</a>
+      <a data-nav="review">备考复盘</a>
+    </nav>
+
+    <div class="nav__right">
+      <button class="icon-btn" id="btn-settings" title="AI 设置" aria-label="AI 设置">⚙</button>
+      <button class="nav__toggle" id="nav-toggle" aria-label="菜单" aria-expanded="false">☰</button>
+    </div>
+  </div>
+  <div class="ai-strip" id="ai-strip">
+    <span class="ai-strip__dot"></span>
+    <span id="ai-strip-text">未配置 AI Key：当前使用内置题库 + 本地评估，全部功能可直接使用。</span>
+    <button class="link-btn" id="ai-strip-btn">接入 AI</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ========== 首页 ========== -->
+  <section class="view" id="view-home">
+    <div class="hero">
+      <div class="hero__inner">
+        <div class="hero__text">
+          <span class="eyebrow">真实面经统计 · 驱动出题</span>
+          <h1>先弄清岗位<span>考什么</span><br>再用工具解决<span>怎么练</span></h1>
+          <p class="lead">
+            从公开求职社区的笔面经整理出岗位考情画像——考点权重、题型配比、高频面试题与出现频次、初复终三轮重点，
+            再以这些统计结果约束出卷与提问。16 个岗位，看考情 → 模拟 → 量化复盘。
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--white" data-nav="written">✍️ 开始一次笔试</a>
+            <a class="btn btn--ghost" data-nav="interview">🎤 开始模拟面试</a>
+          </div>
+          <p class="hero__note">无需注册 · 无需安装 · 数据留在本机浏览器</p>
+        </div>
+
+        <div class="hero__board" aria-hidden="true">
+          <div class="board__head"><span>岗位数据看板</span><span class="dots"><i></i><i></i><i></i></span></div>
+          <div class="board__metrics">
+            <div><b>16</b><span>目标岗位</span></div>
+            <div><b id="home-q-count">160</b><span>内置题目</span></div>
+            <div><b>3</b><span>模拟轮次</span></div>
+          </div>
+          <div class="board__bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="board__foot"><span>考点统计占比</span><span>打开即用</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>16</b><span>岗位考情画像</span></div>
+      <div class="stat"><b>4</b><span>大求职方向</span></div>
+      <div class="stat"><b id="stat-q">160</b><span>道内置笔试题</span></div>
+      <div class="stat"><b>100%</b><span>数据存在本地</span></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-head">
+        <span class="eyebrow">三步闭环</span>
+        <h2>看考情 → 专项练 → 量化复盘</h2>
+        <p class="sub">不是把题库堆给你，而是先告诉你这个岗位的分值分布在哪里。</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="step__no">STEP 01</div>
+          <h3>📊 看考情</h3>
+          <p>选择目标岗位，查看考点占比、题型配比、高频面试题与频次，以及初面/复面/终面的考察重点。</p>
+          <a class="link-btn" data-nav="board">打开岗位看板 →</a>
+        </article>
+        <article class="step">
+          <div class="step__no">STEP 02</div>
+          <h3>✍️ 专项练</h3>
+          <p>从内置题库按题型配比组卷，客观题即时判分、主观题对照参考答案；面试支持语音作答与朗读。</p>
+          <a class="link-btn" data-nav="written">去练一套 →</a>
+        </article>
+        <article class="step">
+          <div class="step__no">STEP 03</div>
+          <h3>📈 量化复盘</h3>
+          <p>每次练习自动记录在浏览器本地，正确率趋势、考点掌握度雷达、失分点汇总，可导出报告。</p>
+          <a class="link-btn" data-nav="review">查看复盘 →</a>
+        </article>
+      </div>
+    </div>
+
+    <div class="section section--tight">
+      <div class="sec-head">
+        <span class="eyebrow">功能模块</span>
+        <h2>四个模块，覆盖备考全流程</h2>
+      </div>
+      <div class="grid-4">
+        <article class="card">
+          <div class="card__ico">📊</div>
+          <h3>岗位数据看板</h3>
+          <p>考点分布、题型占比、高频题条形图、面经关键词与三轮次重点。</p>
+        </article>
+        <article class="card">
+          <div class="card__ico">✍️</div>
+          <h3>笔试模拟</h3>
+          <p>按题型配比组卷，客观题即时判分，主观题对照参考答案并按要点自评。</p>
+        </article>
+        <article class="card">
+          <div class="card__ico">🎤</div>
+          <h3>面试模拟</h3>
+          <p>高频题逐题提问，可语音作答（浏览器识别）、朗读题目，AI 评分与追问。</p>
+        </article>
+        <article class="card">
+          <div class="card__ico">📈</div>
+          <h3>备考复盘</h3>
+          <p>正确率趋势、考点掌握度雷达、历史记录与 Markdown 报告导出。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 岗位看板 ========== -->
+  <section class="view" id="view-board" hidden>
+    <div class="section">
+      <div class="page-head">
+        <div>
+          <h2>岗位数据看板</h2>
+          <p class="sub">数据来源：公开笔面经整理聚合 → 考点权重、题型配比与高频题频次</p>
+        </div>
+        <label class="field field--inline">
+          <span>目标岗位</span>
+          <select id="board-position"></select>
+        </label>
+      </div>
+
+      <div class="kpis" id="board-kpis"></div>
+
+      <div class="panel-grid">
+        <div class="panel">
+          <div class="panel__head"><h3>笔试考点分布</h3><span class="hint">按统计占比排序</span></div>
+          <div class="chart" id="chart-topics"></div>
+        </div>
+        <div class="panel">
+          <div class="panel__head"><h3>题型配比</h3><span class="hint">决定组卷题量</span></div>
+          <div class="chart chart--donut" id="chart-types"></div>
+          <ul class="legend" id="legend-types"></ul>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head"><h3>专业面高频题</h3><span class="hint">括号内为面经提及次数</span></div>
+        <div class="chart" id="chart-pro"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head"><h3>行为面高频题</h3><span class="hint">自我介绍、动机与稳定性类必问</span></div>
+        <div class="chart" id="chart-behavior"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__head"><h3>面经关键词</h3><span class="hint">字号越大代表出现越频繁</span></div>
+        <div class="wordcloud" id="board-keywords"></div>
+      </div>
+
+      <div class="rounds" id="board-rounds"></div>
+    </div>
+  </section>
+
+  <!-- ========== 笔试 ========== -->
+  <section class="view" id="view-written" hidden>
+    <div class="section">
+      <div class="page-head">
+        <div>
+          <h2>笔试模拟</h2>
+          <p class="sub">按考点权重与题型配比组卷；客观题即时判分，主观题给参考答案与自评参考</p>
+        </div>
+      </div>
+
+      <div class="setup-card">
+        <label class="field">
+          <span>目标岗位</span>
+          <select id="written-position"></select>
+        </label>
+        <label class="field">
+          <span>题量</span>
+          <select id="written-count">
+            <option value="5">5 题（约 8 分钟）</option>
+            <option value="8" selected>8 题（约 15 分钟）</option>
+            <option value="12">12 题（约 25 分钟）</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>组卷方式</span>
+          <select id="written-source">
+            <option value="bank">内置题库（推荐，离线可用）</option>
+            <option value="ai">AI 现场出题（需配置 Key）</option>
+          </select>
+        </label>
+        <button class="btn btn--primary" id="btn-paper">生成试卷</button>
+      </div>
+
+      <div id="written-empty" class="empty">
+        <div class="empty__ico">✍️</div>
+        <p>选好岗位与题量，点击「生成试卷」开始。</p>
+        <p class="tiny">题目来自内置题库：按该岗位的考点权重与题型配比抽取，离线可用。</p>
+      </div>
+
+      <form id="paper" hidden></form>
+    </div>
+  </section>
+
+  <!-- ========== 面试 ========== -->
+  <section class="view" id="view-interview" hidden>
+    <div class="section">
+      <div class="page-head">
+        <div>
+          <h2>面试模拟</h2>
+          <p class="sub">按岗位高频题逐题提问，支持语音作答（浏览器识别）、题目朗读与多轮追问</p>
+        </div>
+      </div>
+
+      <div class="setup-card" id="iv-setup">
+        <label class="field">
+          <span>目标岗位</span>
+          <select id="iv-position"></select>
+        </label>
+        <label class="field">
+          <span>模拟轮次</span>
+          <select id="iv-round">
+            <option value="初面">初面（基础 + 动机）</option>
+            <option value="复面">复面（专业深挖）</option>
+            <option value="终面">终面（素质与稳定性）</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>评估引擎</span>
+          <select id="iv-engine">
+            <option value="auto">自动（有 Key 用 AI，否则本地）</option>
+            <option value="local">本地评估（离线可用）</option>
+            <option value="ai">AI 深度评估（需 Key）</option>
+          </select>
+        </label>
+        <button class="btn btn--primary" id="btn-iv-start">开始模拟面试</button>
+      </div>
+
+      <div class="iv" id="iv-room" hidden>
+        <div class="iv__bar">
+          <div class="iv__progress"><span id="iv-progress-text">第 1 / 5 题</span><div class="bar"><i id="iv-progress-fill"></i></div></div>
+          <button class="btn btn--sm btn--ghost-blue" id="btn-iv-quit">结束本轮</button>
+        </div>
+
+        <div class="bubble bubble--interviewer">
+          <div class="bubble__who">面试官 <span class="tag tag--soft" id="iv-round-tag">初面</span></div>
+          <p id="iv-question"></p>
+          <div class="bubble__actions">
+            <button class="mini-btn" id="btn-iv-speak">🔊 朗读这道题</button>
+            <button class="mini-btn" id="btn-iv-stop">⏹ 停止朗读</button>
+          </div>
+        </div>
+
+        <div class="answer-box">
+          <label class="field field--grow">
+            <span>你的回答</span>
+            <textarea id="iv-answer" rows="6" placeholder="可以直接打字；也可以点右侧麦克风说完再识别。建议按 STAR 结构：情境 → 任务 → 行动 → 结果。"></textarea>
+          </label>
+
+          <div class="answer-box__side">
+            <button class="mic-btn" id="btn-iv-mic" type="button">
+              <span class="mic-btn__ico">🎤</span>
+              <span id="iv-mic-label">按下说话</span>
+            </button>
+            <p class="tiny" id="iv-mic-hint">浏览器语音识别，音频不上传（Chrome / Edge 最佳）</p>
+            <div class="counter"><span id="iv-count">0</span> 字</div>
+          </div>
+        </div>
+
+        <div class="iv__actions">
+          <button class="btn btn--primary" id="btn-iv-submit">提交回答，查看评估</button>
+          <button class="btn btn--ghost-blue" id="btn-iv-follow">🔁 请面试官追问</button>
+          <button class="btn btn--ghost-blue" id="btn-iv-skip">跳过这题</button>
+        </div>
+
+        <div id="iv-feedback" hidden></div>
+      </div>
+
+      <div class="iv-summary" id="iv-summary" hidden></div>
+
+      <div class="empty" id="iv-empty">
+        <div class="empty__ico">🎤</div>
+        <p>选择岗位与轮次后点击「开始模拟面试」。</p>
+        <p class="tiny">题目来自该岗位真实面经中的高频问题；不配置 AI 也能练习，评估使用本地规则。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 复盘 ========== -->
+  <section class="view" id="view-review" hidden>
+    <div class="section">
+      <div class="page-head">
+        <div>
+          <h2>个人备考复盘</h2>
+          <p class="sub">所有记录保存在本机浏览器；换设备或清缓存会丢失，可导出报告留存</p>
+        </div>
+        <div class="head-actions">
+          <button class="btn btn--sm btn--ghost-blue" id="btn-export">导出 Markdown 报告</button>
+          <button class="btn btn--sm btn--danger" id="btn-clear">清空记录</button>
+        </div>
+      </div>
+
+      <div class="empty" id="review-empty">
+        <div class="empty__ico">📈</div>
+        <p>还没有练习记录。</p>
+        <p class="tiny">去完成一次笔试或模拟面试，这里会自动生成趋势与掌握度分析。</p>
+      </div>
+
+      <div id="review-content" hidden>
+        <div class="kpis" id="review-kpis"></div>
+        <div class="panel-grid">
+          <div class="panel">
+            <div class="panel__head"><h3>正确率趋势</h3><span class="hint">按笔试次数</span></div>
+            <div class="chart" id="chart-trend"></div>
+          </div>
+          <div class="panel">
+            <div class="panel__head"><h3>考点掌握度</h3><span class="hint">各考点正确率</span></div>
+            <div class="chart" id="chart-mastery"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__head"><h3>练习记录</h3><span class="hint">按时间倒序</span></div>
+          <div class="table-wrap"><table class="table" id="history-table"></table></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 设置弹层 -->
+<div class="modal" id="modal" hidden>
+  <div class="modal__mask" data-close></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal__head">
+      <h3 id="modal-title">AI 设置</h3>
+      <button class="icon-btn" data-close aria-label="关闭">✕</button>
+    </div>
+    <div class="modal__body">
+      <p class="tiny">
+        题库、评分与记录都在浏览器本地完成，不联网也能用。填入你自己的 DeepSeek API Key 后，
+        可解锁「AI 现场出题 / 深度点评 / 面试追问」，Key 只存在本机 localStorage，不会上传。
+      </p>
+      <label class="field">
+        <span>DeepSeek API Key</span>
+        <input id="set-key" type="password" placeholder="sk-..." autocomplete="off">
+      </label>
+      <label class="field">
+        <span>模型</span>
+        <select id="set-model">
+          <option value="deepseek-chat">deepseek-chat（推荐）</option>
+          <option value="deepseek-reasoner">deepseek-reasoner（更慢）</option>
+        </select>
+      </label>
+      <div class="modal__actions">
+        <button class="btn btn--primary" id="btn-save-key">保存</button>
+        <button class="btn btn--ghost-blue" id="btn-clear-key">清除 Key</button>
+      </div>
+      <p class="tiny" id="key-status"></p>
+      <hr>
+      <p class="tiny">
+        为什么不内置 Key？公开仓库里的 Key 会被爬虫抓取并盗刷，GitHub 也可能自动吊销。
+        因此这里采用「自带 Key」模式：不填也能完成全部练习，填了才有 AI 增强。
+      </p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <b>大学生实习 &amp; 校招笔面试数据分析辅导工具</b>
+      <span>真实面经统计驱动 · 纯前端 · 数据留在本机 · MIT License</span>
+    </div>
+    <div class="footer__links">
+      <a href="https://github.com" id="foot-repo" target="_blank" rel="noopener">GitHub 仓库</a>
+      <a data-nav="home">回到首页</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="data.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

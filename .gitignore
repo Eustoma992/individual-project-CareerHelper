@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# 密钥与个人数据
+.env
+.streamlit/secrets.toml
+data/user_records.json
+
+# 本地大模型（483MB，超过 GitHub 单文件限制；首次使用会自动下载）
+models/
+*.bin
+*.pt
+*.onnx
+
+# 工具与缓存
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# 静态站 E2E 截图与临时产物
+.e2e/

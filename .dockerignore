@@ -1,0 +1,16 @@
+.git
+.gitignore
+.venv
+venv
+__pycache__
+*.py[cod]
+.pytest_cache
+
+# 不入镜像：密钥、个人记录、本地大模型
+.streamlit/secrets.toml
+data/user_records.json
+models/
+
+*.log
+.DS_Store
+README.md
