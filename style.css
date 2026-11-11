@@ -3,10 +3,10 @@
    纯静态、无外部依赖、响应式，主色沿用报告的蓝色系
    ============================================================ */
 :root{
-  --navy:#0D2B52;
-  --blue:#2578E0;
-  --blue2:#4E93EC;
-  --sky:#A9CDF8;
+  --navy:#0F2C4C;
+  --blue:#1F4E79;
+  --blue2:#2E75B6;
+  --sky:#9DC3E6;
   --ice:#EAF2FA;
   --ink:#12263A;
   --muted:#5A7184;
@@ -74,7 +74,7 @@ h3{font-size:16px}
 .ai-strip.is-ok{background:#F1FAF5;border-color:#D6EFE1;color:#2C6B4C}
 .ai-strip__dot{width:7px;height:7px;border-radius:50%;background:#D39B2A;flex:0 0 auto}
 .ai-strip.is-ok .ai-strip__dot{background:var(--ok)}
-.link-btn{color:var(--blue2);font-size:12.5px;font-weight:700;border-bottom:1px solid rgba(78,147,236,.35)}
+.link-btn{color:var(--blue2);font-size:12.5px;font-weight:700;border-bottom:1px solid rgba(46,117,182,.35)}
 .link-btn:hover{color:var(--blue)}
 
 /* ---------------- 通用按钮/表单 ---------------- */
@@ -106,7 +106,7 @@ select,input[type=text],input[type=password],textarea{
   width:100%;background:#fff;border:1px solid #D7E3EF;border-radius:var(--radius-sm);
   padding:10px 12px;outline:none;transition:.16s;
 }
-select:focus,input:focus,textarea:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(78,147,236,.12)}
+select:focus,input:focus,textarea:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(46,117,182,.12)}
 textarea{resize:vertical;line-height:1.75;min-height:96px}
 select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' fill='none' stroke='%231F4E79' stroke-width='1.6' stroke-linecap='round'/></svg>");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
 
@@ -117,8 +117,8 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
   position:relative;overflow:hidden;color:#fff;
   background:
     radial-gradient(900px 420px at 84% -12%,rgba(157,195,230,.32),transparent 60%),
-    radial-gradient(720px 400px at 6% 112%,rgba(78,147,236,.42),transparent 62%),
-    #2578E0;
+    radial-gradient(720px 400px at 6% 112%,rgba(46,117,182,.42),transparent 62%),
+    linear-gradient(135deg,#0B2038 0%,#123A5E 46%,#1F4E79 100%);
 }
 .hero::after{
   content:"";position:absolute;inset:0;pointer-events:none;
@@ -201,7 +201,7 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
 .kpi b{display:block;font-size:23px;color:var(--blue);line-height:1.25}
 .kpi span{font-size:12.5px;color:var(--muted)}
-.kpi--accent{background:#2578E0;border:none}
+.kpi--accent{background:linear-gradient(135deg,#123A5E,#2E75B6);border:none}
 .kpi--accent b,.kpi--accent span{color:#fff}
 .kpi--accent span{opacity:.82}
 .kpi--long b{font-size:15px;line-height:1.5}
@@ -273,7 +273,7 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
   border-radius:999px;padding:10px 14px;box-shadow:var(--shadow);margin-top:6px;
 }
 .paper-bar__meta{font-size:13px;color:var(--muted)}
-.result-card{background:#2578E0;color:#fff;border-radius:16px;padding:24px;margin:18px 0}
+.result-card{background:linear-gradient(135deg,#123A5E,#2E75B6);color:#fff;border-radius:16px;padding:24px;margin:18px 0}
 .result-card__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
 .result-card b{display:block;font-size:26px;line-height:1.2}
 .result-card span{font-size:12px;opacity:.8}
@@ -327,7 +327,7 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .engine-tag{font-size:11.5px;color:#7E97AC}
 
 .iv-summary{display:grid;gap:16px}
-.summary-head{background:#2578E0;color:#fff;border-radius:16px;padding:24px}
+.summary-head{background:linear-gradient(135deg,#123A5E,#2E75B6);color:#fff;border-radius:16px;padding:24px}
 .summary-head h3{color:#fff;font-size:18px;margin-bottom:8px}
 .summary-head p{font-size:13.5px;color:#CFE0F0}
 .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
@@ -360,7 +360,7 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .modal__actions{display:flex;gap:10px}
 .toast{
   position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:120;
-  background:#2578E0;color:#fff;font-size:13.5px;padding:11px 20px;border-radius:999px;
+  background:#123A5E;color:#fff;font-size:13.5px;padding:11px 20px;border-radius:999px;
   box-shadow:var(--shadow-lg);opacity:0;transition:.25s;pointer-events:none;
 }
 .toast.is-show{opacity:1;transform:translateX(-50%) translateY(-4px)}

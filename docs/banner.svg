@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="大学生实习与校招笔面试数据分析辅导工具">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#2578E0"/>
-      <stop offset="55%" stop-color="#2578E0"/>
-      <stop offset="100%" stop-color="#4E93EC"/>
+      <stop offset="0%" stop-color="#0F2C4C"/>
+      <stop offset="55%" stop-color="#1F4E79"/>
+      <stop offset="100%" stop-color="#2E75B6"/>
     </linearGradient>
     <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#A9CDF8"/>
-      <stop offset="100%" stop-color="#A9CDF8" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#9DC3E6"/>
+      <stop offset="100%" stop-color="#9DC3E6" stop-opacity="0"/>
     </linearGradient>
   </defs>
 
   <rect width="1200" height="300" fill="url(#bg)"/>
 
   <!-- 装饰：统计柱状 -->
-  <g opacity="0.18" fill="#A9CDF8">
+  <g opacity="0.18" fill="#9DC3E6">
     <rect x="830" y="196" width="26" height="64" rx="6"/>
     <rect x="872" y="160" width="26" height="100" rx="6"/>
     <rect x="914" y="120" width="26" height="140" rx="6"/>
@@ -25,7 +25,7 @@
   </g>
 
   <text x="64" y="96" fill="#FFFFFF" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="40" font-weight="700">大学生实习 &amp; 校招笔面试数据分析辅导工具</text>
-  <text x="64" y="140" fill="#C9E0FB" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="20">真实面经统计 → AI 出题 / 模拟面试 → 量化复盘，让每次练习都有数据依据</text>
+  <text x="64" y="140" fill="#BDD7EE" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="20">真实面经统计 → AI 出题 / 模拟面试 → 量化复盘，让每次练习都有数据依据</text>
 
   <rect x="64" y="172" width="640" height="2" fill="url(#line)"/>
 
@@ -43,5 +43,5 @@
     <text x="560" y="221">Streamlit</text>
   </g>
 
-  <text x="64" y="268" fill="#A9CDF8" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="14">DeepSeek · Plotly · faster-whisper · edge-tts</text>
+  <text x="64" y="268" fill="#9DC3E6" font-family="'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif" font-size="14">DeepSeek · Plotly · faster-whisper · edge-tts</text>
 </svg>

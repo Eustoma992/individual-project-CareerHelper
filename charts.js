@@ -5,7 +5,7 @@
 (function (global) {
   "use strict";
 
-  var PALETTE = ["#2578E0", "#3D8BE8", "#4E93EC", "#6FA8F1", "#8FB9F5", "#A9CDF8", "#C9E0FB", "#DCEBFC"];
+  var PALETTE = ["#0F2C4C", "#1F4E79", "#2E75B6", "#4472C4", "#5B9BD5", "#8FAADC", "#9DC3E6", "#BDD7EE"];
 
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -27,7 +27,7 @@
     var rows = items.map(function (it, i) {
       var y = padTop + i * rowH;
       var w = Math.max(2, (it.value / max) * barMax);
-      var color = it.color || (opt.color || "#4E93EC");
+      var color = it.color || (opt.color || "#2E75B6");
       var val = opt.format ? opt.format(it.value, it) : it.value;
       return '' +
         '<g class="c-row">' +
@@ -35,7 +35,7 @@
         '<rect x="' + labelW + '" y="' + (y + 6) + '" width="' + barMax + '" height="16" rx="8" fill="#F0F6FB"/>' +
         '<rect x="' + labelW + '" y="' + (y + 6) + '" width="' + w.toFixed(1) + '" height="16" rx="8" fill="' + color + '">' +
         '<title>' + esc(it.label) + '：' + esc(val) + '</title></rect>' +
-        '<text x="' + (labelW + w + 8).toFixed(1) + '" y="' + (y + 18) + '" font-size="12" font-weight="700" fill="#2578E0">' + esc(val) + '</text>' +
+        '<text x="' + (labelW + w + 8).toFixed(1) + '" y="' + (y + 18) + '" font-size="12" font-weight="700" fill="#1F4E79">' + esc(val) + '</text>' +
         '</g>';
     }).join("");
     el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img">' + rows + '</svg>';
@@ -58,7 +58,7 @@
       return seg;
     }).join("");
     var center = '<text x="' + c + '" y="' + (c - 2) + '" text-anchor="middle" font-size="13" fill="#7E97AC">题型配比</text>' +
-      '<text x="' + c + '" y="' + (c + 24) + '" text-anchor="middle" font-size="17" font-weight="800" fill="#2578E0">' +
+      '<text x="' + c + '" y="' + (c + 24) + '" text-anchor="middle" font-size="17" font-weight="800" fill="#1F4E79">' +
       (opt.centerText || (items.length + " 类")) + '</text>';
     el.innerHTML = '<svg viewBox="0 0 ' + S + ' ' + S + '" role="img">' + arcs + center + '</svg>';
   }
@@ -88,17 +88,17 @@
       var v = Math.max(2, Math.min(100, it.value)) / 100;
       var px = c + Math.cos(a) * R * v, py = c + Math.sin(a) * R * v;
       poly.push(px.toFixed(1) + "," + py.toFixed(1));
-      dots += '<circle cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="3.5" fill="#2578E0"/>';
+      dots += '<circle cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="3.5" fill="#1F4E79"/>';
       var lx = c + Math.cos(a) * (R + 24), ly = c + Math.sin(a) * (R + 24);
       var anchor = Math.abs(Math.cos(a)) < 0.25 ? "middle" : (Math.cos(a) > 0 ? "start" : "end");
       labels += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 4).toFixed(1) + '" text-anchor="' + anchor +
         '" font-size="10.5" fill="#5A7184">' + esc(cut(it.label, 7)) + '</text>' +
         '<text x="' + lx.toFixed(1) + '" y="' + (ly + 17).toFixed(1) + '" text-anchor="' + anchor +
-        '" font-size="10" font-weight="700" fill="#4E93EC">' + Math.round(it.value) + '%</text>';
+        '" font-size="10" font-weight="700" fill="#2E75B6">' + Math.round(it.value) + '%</text>';
     });
 
     el.innerHTML = '<svg viewBox="0 0 ' + S + ' ' + S + '" role="img">' + rings + axes +
-      '<polygon points="' + poly.join(" ") + '" fill="rgba(78,147,236,.22)" stroke="#2578E0" stroke-width="2"/>' +
+      '<polygon points="' + poly.join(" ") + '" fill="rgba(46,117,182,.22)" stroke="#1F4E79" stroke-width="2"/>' +
       dots + labels + '</svg>';
   }
 
@@ -119,7 +119,7 @@
     var pts = points.map(function (p, i) { return xs(i).toFixed(1) + "," + ys(p.value).toFixed(1); });
     var area = L + "," + ys(0) + " " + pts.join(" ") + " " + xs(points.length - 1).toFixed(1) + "," + ys(0);
     var dots = points.map(function (p, i) {
-      return '<circle cx="' + xs(i).toFixed(1) + '" cy="' + ys(p.value).toFixed(1) + '" r="4" fill="#fff" stroke="#2578E0" stroke-width="2">' +
+      return '<circle cx="' + xs(i).toFixed(1) + '" cy="' + ys(p.value).toFixed(1) + '" r="4" fill="#fff" stroke="#1F4E79" stroke-width="2">' +
         '<title>' + esc(p.label) + '：' + p.value + '%</title></circle>';
     }).join("");
     var labels = points.map(function (p, i) {
@@ -130,8 +130,8 @@
     }).join("");
 
     el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img">' + grid +
-      '<polygon points="' + area + '" fill="rgba(78,147,236,.12)"/>' +
-      '<polyline points="' + pts.join(" ") + '" fill="none" stroke="#2578E0" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<polygon points="' + area + '" fill="rgba(46,117,182,.12)"/>' +
+      '<polyline points="' + pts.join(" ") + '" fill="none" stroke="#1F4E79" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>' +
       dots + labels + '</svg>';
   }
 
