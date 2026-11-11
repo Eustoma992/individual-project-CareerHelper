@@ -1,5 +1,5 @@
-/* 简单离线缓存：核心静态资源走 cache-first，接口请求不缓存 */
-const CACHE = "jobprep-v1";
+/* 离线缓存：网络优先（更新立即生效），断网时回退缓存；跨域接口不缓存 */
+const CACHE = "jobprep-v2";
 const ASSETS = [
   "./",
   "./index.html",
@@ -29,20 +29,16 @@ self.addEventListener("fetch", (e) => {
   if (url.origin !== location.origin) return; // AI 接口等跨域请求不缓存
 
   e.respondWith(
-    caches.match(req).then((hit) => {
-      if (hit) {
-        fetch(req).then((res) => {
-          if (res && res.ok) caches.open(CACHE).then((c) => c.put(req, res.clone()));
-        }).catch(() => {});
-        return hit;
-      }
-      return fetch(req).then((res) => {
+    fetch(req)
+      .then((res) => {
         if (res && res.ok) {
           const copy = res.clone();
           caches.open(CACHE).then((c) => c.put(req, copy));
         }
         return res;
-      }).catch(() => caches.match("./index.html"));
-    })
+      })
+      .catch(() =>
+        caches.match(req).then((hit) => hit || caches.match("./index.html"))
+      )
   );
 });
