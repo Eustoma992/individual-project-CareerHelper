@@ -5,7 +5,7 @@
 (function (global) {
   "use strict";
 
-  var PALETTE = ["#0D2B52", "#2578E0", "#4E93EC", "#3D8BE8", "#6FA8F1", "#8FB9F5", "#A9CDF8", "#C9E0FB"];
+  var PALETTE = ["#2578E0", "#3D8BE8", "#4E93EC", "#6FA8F1", "#8FB9F5", "#A9CDF8", "#C9E0FB", "#DCEBFC"];
 
   function esc(s) {
     return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");

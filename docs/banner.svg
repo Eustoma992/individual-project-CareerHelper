@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="大学生实习与校招笔面试数据分析辅导工具">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0D2B52"/>
+      <stop offset="0%" stop-color="#2578E0"/>
       <stop offset="55%" stop-color="#2578E0"/>
       <stop offset="100%" stop-color="#4E93EC"/>
     </linearGradient>

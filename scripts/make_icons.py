@@ -11,7 +11,7 @@ OUT.mkdir(exist_ok=True)
 # Windows 自带的彩色 emoji 字体
 EMOJI_FONT = pathlib.Path(r"C:\Windows\Fonts\seguiemj.ttf")
 
-GRAD = [(10, 37, 71), (37, 120, 224), (78, 147, 236)]  # #0B2038 → #1F4E79 → #2E75B6
+GRAD = [(37, 120, 224), (37, 120, 224), (37, 120, 224)]  # #0B2038 → #1F4E79 → #2E75B6
 
 
 def gradient(size):
