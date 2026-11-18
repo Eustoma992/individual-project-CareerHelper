@@ -1,11 +1,12 @@
 /* 离线缓存：网络优先（更新立即生效），断网时回退缓存；跨域接口不缓存 */
-const CACHE = "jobprep-v2";
+const CACHE = "jobprep-v3";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
   "./app.js",
   "./charts.js",
+  "./lab.js",
   "./data.js",
   "./manifest.json"
 ];

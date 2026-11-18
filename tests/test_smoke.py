@@ -34,7 +34,8 @@ def test_seed_data_schema():
 
 
 @pytest.mark.parametrize("page", ["pages/dashboard.py", "pages/written.py",
-                                 "pages/interview.py", "pages/profile.py"])
+                                 "pages/interview.py", "pages/profile.py",
+                                 "pages/ml_lab.py"])
 def test_pages_render(page):
     """四个页面在无 API Key、无历史记录时也应正常渲染。"""
     at = AppTest.from_file(str(ROOT / page), default_timeout=90).run()

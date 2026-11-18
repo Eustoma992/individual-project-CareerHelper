@@ -115,7 +115,7 @@
   }
 
   /* ---------------- 路由 ---------------- */
-  var VIEWS = ["home", "board", "written", "interview", "review"];
+  var VIEWS = ["home", "board", "written", "interview", "lab", "review"];
   var current = "home";
   function go(name) {
     if (VIEWS.indexOf(name) < 0) name = "home";
@@ -131,6 +131,7 @@
     if (location.hash !== "#" + name) history.replaceState(null, "", "#" + name);
     window.scrollTo({ top: 0, behavior: "smooth" });
     if (name === "board") renderBoard();
+    if (name === "lab" && window.Lab) window.Lab.init();
     if (name === "review") renderReview();
   }
 
@@ -205,6 +206,46 @@
       return '<article class="round"><h4><span class="round__badge">' + r + "</span>" +
         (i === 0 ? "基础与动机" : i === 1 ? "专业深挖" : "素质与稳定性") + "</h4><p>" + esc(rounds[r]) + "</p></article>";
     }).join("");
+
+    renderWeightVsQuestions(p, w);
+    renderDifficulty();
+  }
+
+  /* 考点权重 vs 内置题量：都折成百分比，看题库结构是否与考情匹配 */
+  function renderWeightVsQuestions(p, w) {
+    var topics = w["考点分布"];
+    var bank = QBANK[p] || [];
+    var total = bank.length || 1;
+    var countMap = {};
+    bank.forEach(function (q) { countMap[q.topic] = (countMap[q.topic] || 0) + 1; });
+
+    var labels = topics.map(function (t) { return t["考点"]; });
+    var weightSeries = topics.map(function (t) { return t["占比"] * 100; });
+    var bankSeries = topics.map(function (t) { return ((countMap[t["考点"]] || 0) / total) * 100; });
+
+    Charts.groupedBar($("#chart-weight-q"), labels, [
+      { name: "面经权重", color: "#1F4E79", values: weightSeries },
+      { name: "题库占比", color: "#7FB2E5", values: bankSeries }
+    ], { format: function (v) { return Math.round(v) + "%"; }, height: 320 });
+
+    $("#legend-weight-q").innerHTML =
+      '<li><i style="background:#1F4E79"></i>面经权重（考点分布）</li>' +
+      '<li><i style="background:#7FB2E5"></i>题库占比（内置 ' + bank.length + ' 道）</li>';
+  }
+
+  /* 各方向的岗位难度分布：难度按 易=1 / 中=2 / 难=3 折算，看方向间难度差异 */
+  function renderDifficulty() {
+    var DIFF = { "易": 1, "中": 2, "难": 3 };
+    var items = [];
+    Object.keys(GROUPS).forEach(function (g) {
+      var vals = GROUPS[g].filter(function (p) { return QBANK[p] && QBANK[p].length; }).map(function (p) {
+        var sum = 0;
+        QBANK[p].forEach(function (q) { sum += DIFF[q.difficulty] || 2; });
+        return sum / QBANK[p].length;
+      });
+      if (vals.length) items.push({ label: g, values: vals, color: Charts.PALETTE[items.length + 1] });
+    });
+    Charts.boxPlot($("#chart-difficulty"), items, { height: 300 });
   }
 
   function kpi(label, value, sub, accent) {

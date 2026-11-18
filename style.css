@@ -411,3 +411,39 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
   .brand__text{display:none}
   .footer__inner{flex-direction:column;align-items:flex-start;gap:10px}
 }
+
+/* ---------------- 模型实验室 ---------------- */
+.lab-controls{display:flex;flex-wrap:wrap;gap:18px 26px;margin:6px 0 16px}
+.lab-field{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--muted);min-width:210px;flex:1 1 210px}
+.lab-field span{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.lab-field b{color:var(--blue);font-variant-numeric:tabular-nums;font-size:13.5px}
+.lab-field input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:999px;
+  background:linear-gradient(90deg,#BFD5EA,#DCE9F6);outline:none;cursor:pointer;
+}
+.lab-field input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--blue);
+  border:2px solid #fff;box-shadow:0 1px 4px rgba(31,78,121,.35);cursor:pointer;
+}
+.lab-field input[type=range]::-moz-range-thumb{
+  width:14px;height:14px;border-radius:50%;background:var(--blue);border:2px solid #fff;cursor:pointer;
+}
+.lab-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;align-items:start}
+.lab-side{display:flex;flex-direction:column;gap:12px}
+.lab-table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+.lab-table th{
+  text-align:left;font-weight:600;color:var(--muted);padding:7px 8px;
+  border-bottom:1px solid var(--line);background:#FAFCFE;
+}
+.lab-table td{padding:6px 8px;border-bottom:1px solid #F1F6FB;color:var(--ink)}
+.lab-table tr:last-child td{border-bottom:none}
+.lab-note{
+  font-size:12.5px;line-height:1.7;color:#4A6B84;background:#F7FBFF;
+  border-left:3px solid var(--sky);border-radius:0 10px 10px 0;padding:10px 14px;margin-top:12px;
+}
+.lab-note--ok{background:#F3FAF6;border-left-color:var(--ok);color:#2C6B4C}
+.lab-note--warn{background:#FDF7EA;border-left-color:var(--warn);color:#A9751B}
+.lab-note--bad{background:#FDF4F3;border-left-color:var(--bad);color:#A33A2E}
+@media (max-width:900px){
+  .lab-grid{grid-template-columns:1fr}
+}

@@ -135,5 +135,91 @@
       dots + labels + '</svg>';
   }
 
-  global.Charts = { hBar: hBar, donut: donut, radar: radar, line: line, PALETTE: PALETTE };
+  /* -------- 分组柱状图：同一批分类下的多组指标对比 -------- */
+  function groupedBar(el, groups, series, opt) {
+    opt = opt || {};
+    if (!groups || !groups.length) { el.innerHTML = '<p class="tiny">暂无数据</p>'; return; }
+    var W = 760, H = opt.height || 300, L = 46, R = 14, T = 24, B = 62;
+    var iw = W - L - R, ih = H - T - B;
+    var max = 0;
+    series.forEach(function (s) { s.values.forEach(function (v) { if (v > max) max = v; }); });
+    max = Math.max(max, 1) * 1.15;
+    var band = iw / groups.length;
+    var bw = Math.min(26, band / (series.length + 0.6));
+
+    var grid = [0, 0.25, 0.5, 0.75, 1].map(function (f) {
+      var v = max * f, y = T + ih - (v / max) * ih;
+      return '<line x1="' + L + '" y1="' + y.toFixed(1) + '" x2="' + (W - R) + '" y2="' + y.toFixed(1) + '" stroke="#EDF3F9"/>' +
+        '<text x="' + (L - 8) + '" y="' + (y + 4).toFixed(1) + '" text-anchor="end" font-size="10" fill="#8AA0B2">' +
+        (opt.format ? opt.format(v) : Math.round(v)) + '</text>';
+    }).join("");
+
+    var bars = "", labels = "";
+    groups.forEach(function (g, gi) {
+      var cx = L + band * gi + band / 2;
+      series.forEach(function (s, si) {
+        var v = s.values[gi] || 0;
+        var h = Math.max(1, (v / max) * ih);
+        var x = cx - (series.length * bw) / 2 + si * bw;
+        bars += '<rect x="' + x.toFixed(1) + '" y="' + (T + ih - h).toFixed(1) + '" width="' + (bw - 3).toFixed(1) +
+          '" height="' + h.toFixed(1) + '" rx="3" fill="' + s.color + '"><title>' + esc(g) + " · " + esc(s.name) + "：" +
+          (opt.format ? opt.format(v) : Math.round(v)) + '</title></rect>';
+      });
+      labels += '<text x="' + cx.toFixed(1) + '" y="' + (H - 38) + '" text-anchor="end" font-size="10.5" fill="#5A7184" ' +
+        'transform="rotate(-28 ' + cx.toFixed(1) + ' ' + (H - 38) + ')">' + esc(cut(g, 10)) + '</text>';
+    });
+
+    var legend = series.map(function (s, i) {
+      return '<g transform="translate(' + (L + i * 118) + ',10)">' +
+        '<rect width="10" height="10" rx="2" fill="' + s.color + '"/>' +
+        '<text x="15" y="9" font-size="11" fill="#5A7184">' + esc(s.name) + '</text></g>';
+    }).join("");
+
+    el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img">' + grid + bars + labels + legend + '</svg>';
+  }
+
+  /* -------- 箱线图：看一组岗位/题型的分布与离群点 -------- */
+  function boxPlot(el, items, opt) {
+    opt = opt || {};
+    if (!items || !items.length) { el.innerHTML = '<p class="tiny">暂无数据</p>'; return; }
+    var W = 720, H = opt.height || 280, L = 44, R = 16, T = 18, B = 46;
+    var iw = W - L - R, ih = H - T - B;
+    var all = [];
+    items.forEach(function (it) { all = all.concat(it.values); });
+    var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all);
+    var pad = (hi - lo) * 0.12 || 0.5;
+    lo -= pad; hi += pad;
+    var ys = function (v) { return T + ih - ((v - lo) / (hi - lo)) * ih; };
+
+    var grid = [0, 0.25, 0.5, 0.75, 1].map(function (f) {
+      var v = lo + (hi - lo) * f, y = ys(v);
+      return '<line x1="' + L + '" y1="' + y.toFixed(1) + '" x2="' + (W - R) + '" y2="' + y.toFixed(1) + '" stroke="#EDF3F9"/>' +
+        '<text x="' + (L - 8) + '" y="' + (y + 4).toFixed(1) + '" text-anchor="end" font-size="10" fill="#8AA0B2">' +
+        v.toFixed(1) + '</text>';
+    }).join("");
+
+    var band = iw / items.length, boxes = "";
+    items.forEach(function (it, i) {
+      var v = it.values.slice().sort(function (a, b) { return a - b; });
+      var q = function (p) {
+        var pos = (v.length - 1) * p, base = Math.floor(pos), rest = pos - base;
+        return v[base + 1] !== undefined ? v[base] + rest * (v[base + 1] - v[base]) : v[base];
+      };
+      var min = v[0], q1 = q(0.25), med = q(0.5), q3 = q(0.75), max = v[v.length - 1];
+      var cx = L + band * i + band / 2, bw = Math.min(56, band * 0.52);
+      var color = it.color || "#2E75B6";
+      boxes += '<line x1="' + cx + '" y1="' + ys(min) + '" x2="' + cx + '" y2="' + ys(max) + '" stroke="' + color + '" stroke-width="1.4"/>' +
+        '<line x1="' + (cx - bw / 3) + '" y1="' + ys(min) + '" x2="' + (cx + bw / 3) + '" y2="' + ys(min) + '" stroke="' + color + '" stroke-width="1.4"/>' +
+        '<line x1="' + (cx - bw / 3) + '" y1="' + ys(max) + '" x2="' + (cx + bw / 3) + '" y2="' + ys(max) + '" stroke="' + color + '" stroke-width="1.4"/>' +
+        '<rect x="' + (cx - bw / 2) + '" y="' + ys(q3) + '" width="' + bw + '" height="' + Math.max(1, ys(q1) - ys(q3)) +
+        '" fill="' + color + '" fill-opacity="0.18" stroke="' + color + '" stroke-width="1.4" rx="3"><title>' +
+        esc(it.label) + "：中位数 " + med.toFixed(2) + "，n=" + v.length + '</title></rect>' +
+        '<line x1="' + (cx - bw / 2) + '" y1="' + ys(med) + '" x2="' + (cx + bw / 2) + '" y2="' + ys(med) + '" stroke="' + color + '" stroke-width="2.6"/>' +
+        '<text x="' + cx + '" y="' + (H - 22) + '" text-anchor="middle" font-size="11" fill="#5A7184">' + esc(cut(it.label, 8)) + '</text>';
+    });
+
+    el.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img">' + grid + boxes + '</svg>';
+  }
+
+  global.Charts = { hBar: hBar, donut: donut, radar: radar, line: line, groupedBar: groupedBar, boxPlot: boxPlot, PALETTE: PALETTE };
 })(window);
